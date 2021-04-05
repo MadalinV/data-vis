@@ -18,14 +18,7 @@ const months = {
 	Dec: 12,
 };
 
-export default class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
-
-	componentDidMount() {
-		let postsByMonth = {};
+let postsByMonth = {};
 		let posts = mockData.data.allPosts;
 		posts.forEach(post => {
 			let month = post.createdAt.split(" ")[1];
@@ -41,9 +34,9 @@ export default class App extends Component {
 		let postsByMonthSorted = Object.keys(postsByMonth)
 			.map(month => ({ month, posts: postsByMonth[month] }))
 			.sort((a, b) => months[a.month] - months[b.month]);
-		this.setState({ postsByMonthSorted });
-    console.log(postsByMonthSorted)
-	}
+      
+
+export default class App extends Component {
 
 	render() {
 		return (
@@ -51,7 +44,7 @@ export default class App extends Component {
           <div style={{width: '100%', minHeight: '100vh', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
             <h1>Number of Posts per month</h1>
             <Histogram
-              data={this.state.postsByMonthSorted}
+              data={postsByMonthSorted}
               width={1000}
               height={600}
             />
